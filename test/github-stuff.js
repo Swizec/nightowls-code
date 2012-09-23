@@ -7,15 +7,29 @@ var github = require('octonode'),
     secrets = require('../secrets.js');
 
 describe('Github', function () {
-    console.log(secrets);
     var client = github.client({username: secrets.test_username,
                                 password: secrets.test_password});
     
     var ghme = client.me();
 
-    ghme.repos(function (err, data) {
-        console.log("error: ", err);
-        console.log("data: ", data);
+    it('should get repo', function (done) {
+        ghme.repos(function (err, data) {
+            var repos = data.map(function (repo) {
+                return repo.full_name;
+            });
+            
+            var ghrepo = client.repo('Swizec/HipsterVision');
+
+            ghrepo.commits(function (err, data) {
+                var commits = data.filter(function (commit) {
+                    return commit.author.login === 'Swizec';
+                });
+
+                console.log(commits.length);
+
+                done();
+            });
+
+        });
     });
-    
 });
