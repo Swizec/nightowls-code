@@ -11,6 +11,8 @@
     "express": "3.0.0rc4"
     , "ejs": "*"
     , "mocha": "*"
+    , "chai": "*"
+    , "octonode": "*"
   },
   "devDependencies": {},
   "optionalDependencies": {},
