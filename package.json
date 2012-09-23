@@ -12,7 +12,7 @@
     , "ejs": "*"
     , "mocha": "*"
     , "chai": "*"
-    , "octonode": "*"
+    , "github": "*"
   },
   "devDependencies": {},
   "optionalDependencies": {},

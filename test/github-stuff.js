@@ -3,33 +3,47 @@ var chai = require('chai'),
     mocha = require('mocha'),
     should = chai.should();
 
-var github = require('octonode'),
+var githubApi = require('github'),
+    github = new githubApi({version: "3.0.0"});
     secrets = require('../secrets.js');
 
 describe('Github', function () {
-    var client = github.client({username: secrets.test_username,
-                                password: secrets.test_password});
-    
-    var ghme = client.me();
+    it('should get all commits', function (done) {
+        var page = function (n, callback) {
+            console.log(n);
+            github.repos.getCommits({user: 'Swizec',
+                                     repo: 'dot.emacs.d',
+                                     per_page: 100},
+                                    function (err, data) {
+                                        console.log("err", err);
+                                        console.log("L", data.length);
+                                        if (err) return callback(err);
+                                        
+                                        if (data.length < 100) {
+                                            callback(err, data);
+                                        }else{
+                                            page(n+1, function (err, data2) {
+                                                callback(err, data.concat(data2));
+                                            });
+                                        }
+                                    });
+        };
 
-    it('should get repo', function (done) {
-        ghme.repos(function (err, data) {
-            var repos = data.map(function (repo) {
-                return repo.full_name;
-            });
-            
-            var ghrepo = client.repo('Swizec/HipsterVision');
-
-            ghrepo.commits(function (err, data) {
-                var commits = data.filter(function (commit) {
-                    return commit.author.login === 'Swizec';
-                });
-
-                console.log(commits.length);
-
-                done();
-            });
-
+        page(0, function (err, data) {
+            console.log("err", err);
+            console.log("data", data.length);
         });
+        
+/*        github.repos.getCommits({user: 'swizec@swizec.com',
+                                 repo: 'HipsterVision',
+                                 per_page: 100},
+                                function (err, data) {
+
+                                    console.log("err", err);
+                                    console.log("data", data);
+                                    
+                                    done();
+
+                                });*/
     });
 });
