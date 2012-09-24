@@ -4,8 +4,7 @@ var chai = require('chai'),
     should = chai.should();
 
 var github = require('octonode'),
-    async = require('async'),
-    _ = require('underscore'),
+    fetching = require('../lib/fetching.js'),
     secrets = require('../secrets.js');
 
 describe('Github', function () {
@@ -14,46 +13,11 @@ describe('Github', function () {
 
     it('should fetch repos', function (done) {
         
-        var ghme = client.me();
-        
-        ghme.repos(function (err, data) {
-            var repos = data.map(function (repo) {
-                return repo.full_name;
-            });
-
-            async.filter(repos,
-                      function (repo, callback) {
-                          var ghrepo = client.repo(repo);
-                          ghrepo.contributors(function (err, data) {
-                              if (err) return callback(false);
-
-                              var sum = function (coll) {
-                                  return _.reduce(
-                                      coll.map(
-                                          function (contributor) {
-                                              return contributor.contributions;
-                                          }),
-                                      function (memo, num) { return memo+num;},
-                                      0);
-                              };
-
-                              var mine = data.filter(
-                                  function (contributor) {
-                                      return contributor.login === 'Swizec';
-                                  });
-                              
-                              var percent = sum(mine)/sum(data);
-
-                              return callback(percent > 0.80);
-                          });
-                      },
-                      function (results) {
-                          console.log(results);
-                          done();
-                      });
-
+        fetching.repositories(client, function (err, repos) {
+            repos.should.have.length(18);
+            done();
         });
-        
+                
     });
 
 });
