@@ -3,6 +3,11 @@
  * GET home page.
  */
 
+var fetching = require('../lib/fetching');
+
 exports.index = function(req, res){
-  res.render('index', { title: 'Express' });
+    fetching.full_punchcard('', function (err, punchcard) {
+        res.render('index', { title: 'Express',
+                              punchcard: punchcard});
+    });
 };
