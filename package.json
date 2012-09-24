@@ -12,7 +12,9 @@
     , "ejs": "*"
     , "mocha": "*"
     , "chai": "*"
-    , "github": "*"
+    , "octonode": "*"
+    , "async": "*"
+    , "underscore": "*"
   },
   "devDependencies": {},
   "optionalDependencies": {},
