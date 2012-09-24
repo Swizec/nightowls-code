@@ -8,6 +8,6 @@ var fetching = require('../lib/fetching');
 exports.index = function(req, res){
     fetching.full_punchcard('', function (err, punchcard) {
         res.render('index', { title: 'Express',
-                              punchcard: punchcard});
+                              punchcard: JSON.stringify(punchcard)});
     });
 };
