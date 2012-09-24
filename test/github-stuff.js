@@ -20,4 +20,14 @@ describe('Github', function () {
                 
     });
 
+    it('should fetch punchcards', function (done) {
+
+        fetching.punchcards(['Swizec/750words-analysis', 'Swizec/compilers-homework',
+                             'Swizec/checkbox-field', 'Swizec/HipsterVision'],
+                            function (err, data) {
+                                data.should.have.length(7*24);
+                                done();
+                            });
+    });
+
 });
