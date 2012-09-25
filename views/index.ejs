@@ -5,11 +5,55 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+
+
+<style type="text/css">
+       svg {
+         shape-rendering: crispEdges;
+        }
+       #stackedbudget-chart line {
+         stroke: #000;
+       }
+       .rule line {
+         stroke: #000;
+       }
+       #histogram-trellis-chart rect {
+          fill: darkblue;
+          stroke: white;
+       }
+       #histogram-trellis-chart line {
+          stroke: black;
+       }
+
+       #treemap-transition .cell {
+         border: solid 1px white;
+         font: 16px;
+         color:white;
+         line-height: 12px;
+         overflow: hidden;
+         position: absolute;
+         text-indent: 2px;
+         text-align: center;
+         vertical-align: middle;
+      }
+
+       table {
+         border-collapse: collapse;
+         border: 2px solid #FFFAFA;
+       }
+       td {
+           padding: 10px;
+       }
+  </style>
+
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+
+    <div id="punchcard"></div>
+
     <script>var punchcard_data = <%- punchcard %></script>
     <script type="text/javascript"
-            src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+            src="http://d3js.org/d3.v2.min.js"></script>
     <script type="text/javascript"
             src="/javascripts/punchcard-graph.js"></script>
   </body>
