@@ -16,6 +16,7 @@
     , "async": "*"
     , "underscore": "*"
     , "superagent": "*"
+    , "async-cache": "*"
   },
   "devDependencies": {},
   "optionalDependencies": {},

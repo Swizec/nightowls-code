@@ -14,7 +14,7 @@ describe('Github', function () {
     it('should fetch repos', function (done) {
         
         fetching.repositories(client, function (err, repos) {
-            repos.should.have.length(18);
+            repos.should.have.length(19);
             done();
         });
                 
@@ -28,6 +28,24 @@ describe('Github', function () {
                                 data.should.have.length(7*24);
                                 done();
                             });
+    });
+
+    it('should cache things', function (done) {
+        
+        fetching.full_punchcard("Swizec", function (err, data) {
+            var t1 = new Date().getTime();
+
+            fetching.full_punchcard("Swizec", function (err, data) {
+                var t2 = new Date().getTime(),
+                    delta = t2-t1;
+
+                require('assert').ok(delta<1000, "Too slow");
+
+                done();
+
+            });
+        });
+
     });
 
 });
