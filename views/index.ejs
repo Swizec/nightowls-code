@@ -8,43 +8,22 @@
 
 
 <style type="text/css">
-       svg {
-         shape-rendering: crispEdges;
-        }
-       #stackedbudget-chart line {
-         stroke: #000;
-       }
-       .rule line {
-         stroke: #000;
-       }
-       #histogram-trellis-chart rect {
-          fill: darkblue;
-          stroke: white;
-       }
-       #histogram-trellis-chart line {
-          stroke: black;
-       }
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #eee;
+    shape-rendering: crispEdges;
+}
 
-       #treemap-transition .cell {
-         border: solid 1px white;
-         font: 16px;
-         color:white;
-         line-height: 12px;
-         overflow: hidden;
-         position: absolute;
-         text-indent: 2px;
-         text-align: center;
-         vertical-align: middle;
-      }
+.axis text {
+    font-family: sans-serif;
+    font-size: 11px;
+}
 
-       table {
-         border-collapse: collapse;
-         border: 2px solid #FFFAFA;
-       }
-       td {
-           padding: 10px;
-       }
-  </style>
+.circle {
+    fill: #222;
+}
+</style>
 
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
