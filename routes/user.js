@@ -21,7 +21,8 @@ exports.login = function(req, res) {
 
 exports.auth = function (req, res) {
     github.auth.login(req.param('code'), function (err, token) {
-        res.send(token);
+        req.session.token = token;
+        res.redirect("/");
     });
 
 };
