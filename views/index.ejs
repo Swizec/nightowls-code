@@ -12,13 +12,20 @@
 
     <div class="container">
 
-      <div class="hero-unit">
+      <% if (showing_punchcard) { %>
+        <div class="span12">
+      <% }else { %>
+        <div class="hero-unit">
+      <% } %>
+
         <h1>When do you <em>really</em> code?</h1>
         <p><blockquote class="lead">Programmers are machines that turn caffeine into code.</blockquote></p>
         <p>But is that actually true? I'm writing a book about <a
         href="http://leanpub.com/nightowls">Why programmers work at
         night</a> and I'm using Github data to see whether our
         perceptions match reality. To do this, I need your help.</p>
+
+        <% if (!showing_punchcard) { %>
         <p><form action="/login" class="form-inline">
           <input type="submit" class="btn btn-primary btn-large"
                  value="OAuth with Github" />
@@ -27,10 +34,12 @@
             Yes, donate my data.
           </label>
         </p>
+        <% } %>
       </div>
 
       <div class="row">
         <div id="punchcard" class="span12"></div>
+        <p>&nbsp;</p>
       </div>
 
       <div class="row">

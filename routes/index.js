@@ -10,11 +10,13 @@ exports.index = function(req, res){
 
     if (!token) {
         res.render('index', {title: 'When do you really code?',
-                             punchcard: []});
+                             punchcard: [],
+                             showing_punchcard: false});
     }else{
         fetching.full_punchcard(token, function (err, punchcard) {
-            res.render('index', { title: 'When do you really code?',
-                                  punchcard: JSON.stringify(punchcard)});
+            res.render('index', {title: 'When do you really code?',
+                                 punchcard: JSON.stringify(punchcard),
+                                 showing_punchcard: true});
         });
     }
 };
