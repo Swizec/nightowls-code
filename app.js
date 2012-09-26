@@ -4,7 +4,7 @@
  */
 
 var express = require('express')
-  , routes = require('./routes')
+  , index = require('./routes/index')
   , user = require('./routes/user')
   , http = require('http')
   , path = require('path');
@@ -29,10 +29,26 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', routes.index);
+app.param(function(name, fn){
+  if (fn instanceof RegExp) {
+    return function(req, res, next, val){
+      var captures;
+      if (captures = fn.exec(String(val))) {
+        req.params[name] = captures;
+        next();
+      } else {
+        next('route');
+      }
+    }
+  }
+});
+
+app.param('username', /^.+$/);
+
+app.get('/', index.index);
 app.get('/login', user.login);
 app.get('/auth', user.auth);
-app.get('/users', user.list);
+app.get('/:username', index.username);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
