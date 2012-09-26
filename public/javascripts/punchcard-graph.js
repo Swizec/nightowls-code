@@ -1,21 +1,33 @@
 
-var bucket = {w: 30, h: 30},
-    max = _.max(_.map(punchcard_data,
+var w = 600,
+    h = 300,
+    pad = 20,
+    max_r = _.max(_.map(punchcard_data,
                       function (d) { return d[2]; }));
 
-console.log(max);
+var x = d3.scale.linear().domain([0, 23]).range([pad, w-pad]),
+    y = d3.scale.linear().domain([0, 6]).range([pad, h-pad]),
+    r = d3.scale.linear()
+        .domain([0, d3.max(punchcard_data, function (d) { return d[2]; })])
+        .range([0, 8]);
 
 var svg = d3.select("#punchcard")
         .append("svg")
-        .attr("width", bucket.w*(24+2))
-        .attr("height", bucket.h*(7+2));
+        .attr("width", w)
+        .attr("height", h);
 
 svg.selectAll("circle")
     .data(punchcard_data)
     .enter()
     .append("circle")
-    .attr("cx", function (d) { return d[1]*bucket.w+bucket.w; })
-    .attr("cy", function (d) { return d[0]*bucket.h+bucket.h; })
-    .attr("r", function (d) { return Math.floor(d[2]/max*(bucket.w/3)); });
+    .attr("cx", function (d) { return x(d[1]); })
+    .attr("cy", function (d) { return y(d[0]); })
+    .attr("r", function (d) { return r(d[2]); });
+
+/*svg.selectAll("text")
+    .data(['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'])
+    .enter()
+    .append("text")
+    .text(*/
 
 
