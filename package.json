@@ -17,6 +17,7 @@
     , "underscore": "*"
     , "superagent": "*"
     , "async-cache": "*"
+    , "mongodb": "*"
   },
   "devDependencies": {},
   "optionalDependencies": {},
