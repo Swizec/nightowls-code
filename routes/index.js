@@ -37,6 +37,7 @@ var show_punchcard = function (me, token, req, res) {
                                            {title: 'When do you really code?',
                                             punchcard: JSON.stringify(punchcard),
                                             showing_punchcard: true,
-                                            this_is_me: me});
+                                            this_is_me: me,
+                                            username: req.param('username', [])[0]});
                             });
 };

@@ -14,3 +14,18 @@
 .circle {
     fill: #222;
 }
+
+.sharing-is-caring {
+    position: relative;
+    top: 21px;
+}
+
+.sharing-is-caring div.wrap {
+    width: 100px;
+    display: inline-block;
+}
+
+.sharing-is-caring div.wrap.fb {
+    position: relative;
+    top: -2px;
+}
