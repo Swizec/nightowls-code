@@ -16,6 +16,9 @@ var auth_url = github.auth.config({
 }).login(['user']);
 
 exports.login = function(req, res) {
+    if (req.param('contribute-data')) {
+        req.session.contribute_data = true;
+    }
     res.redirect(301, auth_url);
 };
 
