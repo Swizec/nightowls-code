@@ -12,7 +12,12 @@ var x = d3.scale.linear().domain([0, 23]).range([x_pad, w-pad]),
         .domain([0, d3.max(punchcard_data, function (d) { return d[2]; })])
         .range([0, 12]);
 
-var xAxis = d3.svg.axis().scale(x).orient("bottom").ticks(24),
+var xAxis = d3.svg.axis().scale(x).orient("bottom")
+        .ticks(24)
+        .tickFormat(function (d, i) {
+            var m = (d > 12) ? "p" : "a";
+            return (d%12 == 0) ? 12+m :  d%12+m;
+        }),
     yAxis = d3.svg.axis().scale(y).orient("left")
         .ticks(7)
         .tickFormat(function (d, i) {
@@ -42,11 +47,4 @@ svg.selectAll("circle")
     .attr("cx", function (d) { return x(d[1]); })
     .attr("cy", function (d) { return y(d[0]); })
     .attr("r", function (d) { return r(d[2]); });
-
-/*svg.selectAll("text")
-    .data(['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'])
-    .enter()
-    .append("text")
-    .text(*/
-
 
