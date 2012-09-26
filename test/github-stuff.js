@@ -32,10 +32,10 @@ describe('Github', function () {
 
     it('should cache things', function (done) {
         
-        fetching.full_punchcard("Swizec", function (err, data) {
+        fetching.full_punchcard("Swizec", true, function (err, data) {
             var t1 = new Date().getTime();
 
-            fetching.full_punchcard("Swizec", function (err, data) {
+            fetching.full_punchcard("Swizec", true, function (err, data) {
                 var t2 = new Date().getTime(),
                     delta = t2-t1;
 
