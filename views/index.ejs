@@ -2,40 +2,75 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel='stylesheet' href='/css/style.css' />
   </head>
   <body>
 
+    <div class="navbar">
+    </div>
 
-<style type="text/css">
-.axis path,
-.axis line {
-    fill: none;
-    stroke: #eee;
-    shape-rendering: crispEdges;
-}
+    <div class="container">
 
-.axis text {
-    font-family: sans-serif;
-    font-size: 11px;
-}
+      <div class="hero-unit">
+        <h1>When do you <em>really</em> code?</h1>
+        <p><blockquote class="lead">Programmers are machines that turn caffeine into code.</blockquote></p>
+        <p>But is that actually true? I'm writing a book about <a
+        href="http://leanpub.com/nightowls">Why programmers work at
+        night</a> and I'm using Github data to see whether our
+        perceptions match reality. To do this, I need your help.</p>
+        <p><form action="/login" class="form-inline">
+          <input type="submit" class="btn btn-primary btn-large"
+                 value="OAuth with Github" />
+          <label class="checkbox">
+            <input type="checkbox" checked name="contribute-data" />
+            Yes, donate my data.
+          </label>
+        </p>
+      </div>
 
-.circle {
-    fill: #222;
-}
-</style>
+      <div class="row">
+        <div id="punchcard" class="span12"></div>
+      </div>
 
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+      <div class="row">
+        <div class="span4">
+          <h1>What's this?</h1>
+          <p>A punchcard of the Github repositories where you
+          contributed at least 80% of commits to the master branch.</p>
+          <p>The punchcard shows when you are making commits and is
+          calculated as an aggregate of the punchcards Github shows
+          per repository.</p>
+        </div>
 
-    <div id="punchcard"></div>
+        <div class="span4">
+          <h1>For science!</h1>
+          <p>Everyone's data is being added to a global punchcard so we can
+          answer once and for all <em>"<strong>Do</strong> programmers work
+          at night?"</em></p>
+        </div>
+
+        <div class="span4">
+          <iframe width="160" height="400"
+                  src="https://leanpub.com/nightowls/embed"
+                  frameborder="0" allowtransparency="true"
+                  style="float: right"></iframe>
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; Copyright Swizec 2012</p>
+      </footer>
+
+    </div>
 
     <script>var punchcard_data = <%- punchcard %></script>
-    <script type="text/javascript"
-            src="http://d3js.org/d3.v2.min.js"></script>
-    <script type="text/javascript"
-            src="http://underscorejs.org/underscore-min.js"></script>
-    <script type="text/javascript"
-            src="/javascripts/punchcard-graph.js"></script>
+    <script src="http://d3js.org/d3.v2.min.js"></script>
+    <script src="http://underscorejs.org/underscore-min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/punchcard-graph.js"></script>
   </body>
 </html>

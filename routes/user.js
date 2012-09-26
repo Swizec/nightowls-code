@@ -13,7 +13,7 @@ exports.list = function(req, res){
 var auth_url = github.auth.config({
     id: secrets.client_id,
     secret: secrets.client_secret
-}).login(['user', 'repo']);
+}).login(['user']);
 
 exports.login = function(req, res) {
     res.redirect(301, auth_url);
