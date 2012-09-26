@@ -18,7 +18,7 @@ describe('Data', function () {
                         Server('localhost', 27017, {auto_reconnect: true}));
 
         db.open(function (err, db) {
-            data.save('username', 'token', [['data']],
+            data.save('username', 'token', [['data']], true,
                       function () {
                           db.collection('punchcards', function (err, collection) {
                               collection.find({username: 'username'}).toArray(
@@ -28,6 +28,7 @@ describe('Data', function () {
                                       item.token.should.equal('token');
                                       item.username.should.equal('username');
                                       item.data.should.eql([['data']]);
+                                      item.donate.should.equal(true);
 
                                       db.close();
                                       done();
@@ -45,12 +46,13 @@ describe('Data', function () {
                         Server('localhost', 27017, {auto_reconnect: true}));
 
         db.open(function (err, db) {
-            data.save('username', 'token', [['data']],
+            data.save('username', 'token', [['data']], true, 
                       function () {
                           data.get('username', function (err, punchcard) {
                               punchcard.token.should.equal('token');
                               punchcard.username.should.equal('username');
                               punchcard.data.should.eql([['data']]);
+                              punchcard.donate.should.equal(true);
                               
                               db.close();
                               done();
