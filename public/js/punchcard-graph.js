@@ -1,4 +1,6 @@
 
+d3.json('_punchcard-data', function (punchcard_data) {
+
 var w = 940,
     h = 300,
     pad = 20,
@@ -48,3 +50,5 @@ svg.selectAll("circle")
     .attr("cy", function (d) { return y(d[0]); })
     .attr("r", function (d) { return r(d[2]); });
 
+
+});

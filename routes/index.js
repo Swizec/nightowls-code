@@ -11,7 +11,6 @@ exports.index = function(req, res){
 
     if (!token) {
         res.render('index', {title: 'When do you really code?',
-                             punchcard: [],
                              showing_punchcard: false});
     }else{
         show_punchcard(true, token, req, res);
@@ -29,13 +28,19 @@ exports.username = function (req, res) {
              });
 };
 
+exports.punchcard_data = function (req, res) {
+    fetching.full_punchcard(req.session.token, req.session.contribute_data || false,
+                            function (err, punchcard) {
+                                res.send(punchcard);
+                            });
+};
+
 var show_punchcard = function (me, token, req, res) {
     fetching.full_punchcard(token, req.session.contribute_data || false, 
                             function (err, punchcard) {
 
                                 res.render('index', 
                                            {title: 'When do you really code?',
-                                            punchcard: JSON.stringify(punchcard),
                                             showing_punchcard: true,
                                             this_is_me: me,
                                             username: req.param('username', [])[0]});
