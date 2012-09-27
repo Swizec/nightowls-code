@@ -34,6 +34,11 @@ svg.append("g")
     .attr("transform", "translate("+(x_pad-pad)+", 0)")
     .call(yAxis);
 
+svg.append("text")
+    .attr("class", "loading")
+    .text("Loading ...")
+    .attr("x", function () { return w/2; })
+    .attr("y", function () { return h/2-5; });
 
 d3.json(Data_url, function (punchcard_data) {
     var max_r = _.max(_.map(punchcard_data,
@@ -41,6 +46,8 @@ d3.json(Data_url, function (punchcard_data) {
         r = d3.scale.linear()
             .domain([0, d3.max(punchcard_data, function (d) { return d[2]; })])
             .range([0, 12]);
+
+    svg.selectAll(".loading").remove();
 
     svg.selectAll("circle")
         .data(punchcard_data)
