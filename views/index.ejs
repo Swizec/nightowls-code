@@ -126,7 +126,8 @@
 
     </div>
 
-    <script>var punchcard_data = <%- punchcard %></script>
+    <script>var Data_url = "<%= (username) ? '/_punchcard-data?username='+username : '/_punchcard-data' %>"</script>
+
     <script src="http://d3js.org/d3.v2.min.js"></script>
     <script src="http://underscorejs.org/underscore-min.js"></script>
     <script src="http://code.jquery.com/jquery-latest.js"></script>

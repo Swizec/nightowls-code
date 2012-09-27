@@ -48,6 +48,7 @@ app.param('username', /^.+$/);
 app.get('/', index.index);
 app.get('/login', user.login);
 app.get('/auth', user.auth);
+app.get('/_punchcard-data', index.punchcard_data);
 app.get('/:username', index.username);
 
 http.createServer(app).listen(app.get('port'), function(){
