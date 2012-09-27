@@ -4,7 +4,8 @@
  */
 
 var fetching = require('../lib/fetching'),
-    data = require('../lib/data');
+    data = require('../lib/data'),
+    github = require('octonode');
 
 exports.index = function(req, res){
     var token = req.session.token;
@@ -14,7 +15,10 @@ exports.index = function(req, res){
                              showing_punchcard: false,
                              username: false});
     }else{
-        show_punchcard(true, token, req, res);
+        github.client(token).me().info(function (err, info) {
+            res.redirect('/'+info.login);
+        });
+        //show_punchcard(true, token, req, res);
     }
 };
 
