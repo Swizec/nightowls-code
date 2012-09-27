@@ -16,7 +16,10 @@ exports.index = function(req, res){
                              username: false});
     }else{
         github.client(token).me().info(function (err, info) {
-            res.redirect('/'+info.login);
+            data.save(info.login, token, [], req.session.contribute_data || false,
+                      function (err) {
+                          res.redirect('/'+info.login);
+                      });
         });
         //show_punchcard(true, token, req, res);
     }
@@ -28,7 +31,7 @@ exports.username = function (req, res) {
                  if (!punchcard) {
                      res.send(404, "Don't have this yet :/");
                  }else{
-                     show_punchcard(false, punchcard.token, req, res);
+                     show_punchcard(punchcard.token, req, res);
                  }
              });
 };
@@ -52,10 +55,10 @@ exports.punchcard_data = function (req, res) {
     }
 };
 
-var show_punchcard = function (me, token, req, res) {
+var show_punchcard = function (token, req, res) {
     res.render('index', 
                {title: 'When do you really code?',
                 showing_punchcard: true,
-                this_is_me: me,
+                this_is_me: req.session.token === token,
                 username: req.param('username', [])[0]});
 };
