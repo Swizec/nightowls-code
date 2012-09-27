@@ -1,5 +1,5 @@
 
-d3.json('_punchcard-data', function (punchcard_data) {
+d3.json(Data_url, function (punchcard_data) {
 
 var w = 940,
     h = 300,
