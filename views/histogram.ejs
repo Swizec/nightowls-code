@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel='stylesheet' href='/css/style.css' />
+  </head>
+  <body>
+
+    <div class="navbar">
+    </div>
+
+    <div class="container">
+
+      <% if (showing_punchcard) { %>
+        <div class="span12">
+      <% }else { %>
+        <div class="hero-unit">
+      <% } %>
+
+        <h1>When do you <em>really</em> code?</h1>
+        <p><blockquote class="lead">Programmers are machines that turn caffeine into code.</blockquote></p>
+        <p>But is that actually true? I'm writing a book about <a
+        href="http://leanpub.com/nightowls">Why programmers work at
+        night</a> and I'm using Github data to see whether our
+        perceptions match reality. To do this, I need your help.</p>
+
+      </div>
+
+      <% if (showing_punchcard) { %>
+      <div class="row">
+        <h1 class="span6">
+        <% if (this_is_me) { %>
+          Your punchcard
+        <% }else{ %>
+          <%= username %>'s punchcard
+        <% } %>
+        </h1>
+
+        <div class="span6 sharing-is-caring">
+          <div class="wrap"><a href="https://twitter.com/share"
+             class="twitter-share-button" data-text="See when you work; for science!"
+             data-via="Swizec">Tweet</a></div>
+          <div class="wrap fb"><div class="fb-like" data-send="false" data-layout="button_count" data-width="120" data-show-faces="false"></div></div>
+          <div class="wrap"><div class="g-plusone" data-size="medium" data-annotation="inline" data-width="120"></div></div>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div id="histogram" class="span12"></div>
+        <p>&nbsp;</p>
+      </div>
+
+
+      <div class="row">
+        <div class="span12">
+          <% if (!this_is_me) { %>
+          <form action="/login" class="form-inline">
+            <input type="submit" class="btn btn-primary"
+                   value="Get your own!" />
+            <label class="checkbox">
+              <input type="checkbox" checked name="contribute-data" />
+              Yes, donate my data.
+            </label>
+          </form>
+          <% } %>
+        </div>
+      </div>
+
+      <% } %>
+
+      <div class="row">
+        <div class="span4">
+          <h1>What's this?</h1>
+          <p>A punchcard of the Github repositories where you
+          contributed at least 80% of commits to the master branch.</p>
+          <p>The punchcard shows when you are making commits and is
+          calculated as an aggregate of the punchcards Github shows
+          per repository.</p>
+        </div>
+
+        <div class="span4">
+          <h1>For science!</h1>
+          <p>Everyone's data is being added to a global punchcard so we can
+          answer once and for all <em>"<strong>Do</strong> programmers work
+          at night?"</em></p>
+        </div>
+
+        <div class="span4">
+          <iframe width="160" height="400"
+                  src="https://leanpub.com/nightowls/embed"
+                  frameborder="0" allowtransparency="true"
+                  style="float: right"></iframe>
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; Copyright Swizec 2012</p>
+        <p><a href="https://twitter.com/Swizec" class="twitter-follow-button" data-show-count="true">Follow @Swizec</a></p>
+      </footer>
+
+    </div>
+
+    <script>var Data_url = '/_histogram-data';</script>
+
+    <script src="http://d3js.org/d3.v2.min.js"></script>
+    <script src="http://underscorejs.org/underscore-min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/histogram-graph.js"></script>
+
+
+    <script>!function(d,s,id){var
+    js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    <script type="text/javascript">
+      (function() {
+      var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+      po.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+    </script>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_PI/all.js#xfbml=1&appId=307049529309356";
+    fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-1464315-19']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+  </body>
+</html>

@@ -39,7 +39,7 @@ app.param(function(name, fn){
       } else {
         next('route');
       }
-    }
+    };
   }
 });
 
@@ -49,6 +49,10 @@ app.get('/', index.index);
 app.get('/login', user.login);
 app.get('/auth', user.auth);
 app.get('/_punchcard-data', index.punchcard_data);
+app.get('/_histogram-data', index.histogram_data);
+
+app.get('/histogram/:type', index.histogram);
+
 app.get('/:username', index.username);
 
 http.createServer(app).listen(app.get('port'), function(){

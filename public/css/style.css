@@ -33,3 +33,7 @@
 #punchcard {
     height: 300px;
 }
+
+.bar {
+  fill: steelblue;
+}
