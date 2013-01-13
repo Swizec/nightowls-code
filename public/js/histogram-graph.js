@@ -24,10 +24,10 @@ svg.append("text")
     .attr("class", "loading")
     .text("Loading ...")
     .attr("x", function () { return w/2; })
-    .attr("y", function () { return h/2-5; });
+    .attr("y" ,function () { return h/2-5; });
 
 
-d3.json(Data_url, function (histogram_data) {
+d3.json('/data/histogram-hours.json', function (histogram_data) {
     var data = _.map(_.keys(histogram_data),
                      function (key) {
                          return {hour: parseInt(key, 10),
@@ -56,25 +56,11 @@ d3.json(Data_url, function (histogram_data) {
         .attr('class', 'bar')
         .attr('x', function (d) { return x(d.hour); })
         .attr('width', x.rangeBand())//function () { return 10; })
+        .attr('y', h-pad)
+        .transition()
+        .delay(function (d) { return d.hour*20; })
+        .duration(800)
         .attr('y', function (d) { return y(d.count); })
         .attr('height', function (d) { return h-pad - y(d.count); });
-    
 
-/*    var max_r = _.max(_.map(punchcard_data,
-                      function (d) { return d[2]; })),
-        r = d3.scale.linear()
-            .domain([0, d3.max(punchcard_data, function (d) { return d[2]; })])
-            .range([0, 12]);
-
-/*    svg.selectAll("circle")
-        .data(punchcard_data)
-        .enter()
-        .append("circle")
-        .attr("class", "circle")
-        .attr("cx", function (d) { return x(d[1]); })
-        .attr("cy", function (d) { return y(d[0]); })
-        .attr("r", function (d) { return 0; })
-        .transition()
-        .duration(800)
-        .attr("r", function (d) { return r(d[2]); });*/
 });
