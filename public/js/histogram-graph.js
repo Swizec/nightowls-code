@@ -66,7 +66,7 @@ GraphView = Backbone.View.extend({
                                  return {bucket: parseInt(key, 10),
                                          count: histogram_data[key]};
                              });
-            
+
             x.domain(data.map(function (d) { return d.bucket; }));
             y.domain([0, d3.max(data, function (d) { return d.count; })]);
             
@@ -109,10 +109,7 @@ GraphView = Backbone.View.extend({
         svg.selectAll('.axis').remove();
 
         svg.selectAll('rect')
-            .transition()
-            .duration(200)
-            .attr('y', h-pad)
-            .attr('height', 0)
+            .remove()
             .call(callback);
     }
 
