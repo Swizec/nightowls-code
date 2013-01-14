@@ -1,6 +1,30 @@
 
 (function () {
 
+    var NavView = Backbone.View.extend({
+        model: new Backbone.Model(),
+
+        events: {
+            "click a": "clicked"
+        },
+
+        initialize: function () {
+            this.model.bind('change', _.bind(this.render, this));
+        },
+
+        render: function () {
+            this.$el.find('.active').removeClass('active');
+            this.$el.find('[data-type='+this.model.get('state')+']').addClass('active');
+        },
+
+        clicked: function (event) {
+            event.preventDefault();
+
+            this.options.router.navigate("/"+$(event.currentTarget).attr('data-type'),
+                                         {trigger: true});
+        }
+    });
+
     var App = Backbone.Router.extend({
         
         routes: {
@@ -9,15 +33,19 @@
         },
 
         initialize: function () {
-            this.view = new GraphView();
+            this.graph = new GraphView();
+            this.nav = new NavView({el: $('#graph-nav'),
+                                    router: this});
         },
 
         hours: function () {
-            this.view.render('hours');
+            this.graph.render('hours');
+            this.nav.model.set({state: 'hours'});
         },
 
         days: function () {
-            this.view.render('days');
+            this.graph.render('days');
+            this.nav.model.set({state: 'days'});
         }
     });
 

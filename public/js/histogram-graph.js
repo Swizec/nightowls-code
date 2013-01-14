@@ -19,18 +19,26 @@ GraphView = Backbone.View.extend({
         this.xAxis = d3.svg.axis().scale(this.x).orient("bottom");
     },
 
-    render: function (type) {
-        this.svg.append("text")
-            .attr("class", "loading")
-            .text("Loading ...")
-            .attr("x", _.bind(function () { return this.width/2; }, this))
-            .attr("y", _.bind(function () { return this.height/2-5; }, this));
+    render: function (type) { 
+        var draw = function () {
+            this.svg.append("text")
+                .attr("class", "loading")
+                .text("Loading ...")
+                .attr("x", _.bind(function () { return this.width/2; }, this))
+                .attr("y", _.bind(function () { return this.height/2-5; }, this));
+            
+            
+            this.xAxis.tickFormat({hours: this.hoursTickFormat,
+                                   days: this.daysTickFormat}[type]);
+            
+            this.drawGraph('/data/histogram-'+type+'.json');
+        };
 
-       
-        this.xAxis.tickFormat({hours: this.hoursTickFormat,
-                               days: this.daysTickFormat}[type]);
-
-        this.drawGraph('/data/histogram-'+type+'.json');
+        if (this.graph_drawn) {
+            this.clear(_.bind(draw, this));
+        }else{
+            _.bind(draw, this)();
+        }        
     },
 
     hoursTickFormat: function (d, i) {
@@ -87,8 +95,25 @@ GraphView = Backbone.View.extend({
                 .duration(800)
                 .attr('y', function (d) { return y(d.count); })
                 .attr('height', function (d) { return h-pad - y(d.count); });
+
+            this.graph_drawn = true;
             
         }, this));
+    },
+
+    clear: function (callback) {
+        var svg = this.svg,
+            h = this.height,
+            pad = this.pad;
+
+        svg.selectAll('.axis').remove();
+
+        svg.selectAll('rect')
+            .transition()
+            .duration(200)
+            .attr('y', h-pad)
+            .attr('height', 0)
+            .call(callback);
     }
 
 });
