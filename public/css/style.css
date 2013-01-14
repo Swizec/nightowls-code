@@ -15,9 +15,8 @@
     fill: #222;
 }
 
-.sharing-is-caring {
-    position: relative;
-    top: 21px;
+.center {
+    text-align: center;
 }
 
 .sharing-is-caring div.wrap {
@@ -36,4 +35,8 @@
 
 .bar {
   fill: steelblue;
+}
+
+#graph-nav {
+    display: inline-block;
 }
