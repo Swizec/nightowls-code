@@ -12,32 +12,22 @@
 
     <div class="container">
 
-      <% if (showing_punchcard) { %>
-        <div class="span12">
-      <% }else { %>
-        <div class="hero-unit">
-      <% } %>
+      <div class="span12">
 
-        <h1>When do you <em>really</em> code?</h1>
-        <p><blockquote class="lead">Programmers are machines that turn caffeine into code.</blockquote></p>
-        <p>But is that actually true? I'm writing a book about <a
-        href="http://leanpub.com/nightowls">Why programmers work at
-        night</a> and I'm using Github data to see whether our
-        perceptions match reality. To do this, I need your help.</p>
-
+        <h1>When do we code?</h1>
+        <p><blockquote class="lead">Programmers are machines that turn caffeine into code?</blockquote></p>
       </div>
 
-      <% if (showing_punchcard) { %>
       <div class="row">
-        <h1 class="span6">
-        <% if (this_is_me) { %>
-          Your punchcard
-        <% }else{ %>
-          <%= username %>'s punchcard
-        <% } %>
-        </h1>
+        <h1 class="span6">Commit times histogram</h1>
+      </div>
 
-        <div class="span6 sharing-is-caring">
+      <div class="row">
+        <div id="histogram" class="span12"></div>
+        <p>&nbsp;</p>
+
+     <div class="row">
+       <div class="span6 sharing-is-caring center">
           <div class="wrap"><a href="https://twitter.com/share"
              class="twitter-share-button" data-text="See when you work; for science!"
              data-via="Swizec">Tweet</a></div>
@@ -45,46 +35,40 @@
           <div class="wrap"><div class="g-plusone" data-size="medium" data-annotation="inline" data-width="120"></div></div>
         </div>
 
-      </div>
-
-      <div class="row">
-        <div id="histogram" class="span12"></div>
-        <p>&nbsp;</p>
-      </div>
-
-
-      <div class="row">
-        <div class="span12">
-          <% if (!this_is_me) { %>
-          <form action="/login" class="form-inline">
-            <input type="submit" class="btn btn-primary"
-                   value="Get your own!" />
-            <label class="checkbox">
-              <input type="checkbox" checked name="contribute-data" />
-              Yes, donate my data.
-            </label>
-          </form>
-          <% } %>
+        <div class="span6 center">
+          Change graph:
+          <div id="graph-nav" class="btn-group">
+            <a href="hours" class="btn" data-type="hours">Hour</a>
+            <a href="days" class="btn" data-type="days">Days</a>
+          </div>
         </div>
       </div>
 
-      <% } %>
+      <div class="row">
+        <p>&nbsp;</p>
+      </div>
 
       <div class="row">
         <div class="span4">
           <h1>What's this?</h1>
-          <p>A punchcard of the Github repositories where you
-          contributed at least 80% of commits to the master branch.</p>
-          <p>The punchcard shows when you are making commits and is
-          calculated as an aggregate of the punchcards Github shows
-          per repository.</p>
+          <p>Doing research for <a
+          href="https://leanpub.com/nightowls">Why programmers work at
+          night</a>, I analyzed 440,000 Github
+          repositories. You are looking at the histogram of their
+          commit times.</p>
+          <p>I have about 3GB of punchcard data on a hard drive in the
+          cloud, I'm taking suggestions about what I should look into
+          next :)</p>
         </div>
 
         <div class="span4">
-          <h1>For science!</h1>
-          <p>Everyone's data is being added to a global punchcard so we can
-          answer once and for all <em>"<strong>Do</strong> programmers work
-          at night?"</em></p>
+          <h1>What's it mean?</h1>
+          <p>It means programmers <em>do not</em> work at night. They
+          like afternoons and evenings</p>
+          <p>Commit volume peaks between 3pm and 4pm when people are
+          getting off work, after that it drops dramatically but stays
+          relatively high and level until midnight. Indicating a
+          <em>lot</em> of work happens in early to late evening.</p>
         </div>
 
         <div class="span4">
@@ -104,13 +88,13 @@
 
     </div>
 
-    <script>var Data_url = '/_histogram-data';</script>
-
     <script src="http://d3js.org/d3.v2.min.js"></script>
     <script src="http://underscorejs.org/underscore-min.js"></script>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="/js/backbone-min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/histogram-graph.js"></script>
+    <script src="/js/histogram-app.js"></script>
 
 
     <script>!function(d,s,id){var
