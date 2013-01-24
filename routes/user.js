@@ -13,7 +13,7 @@ exports.list = function(req, res){
 var auth_url = github.auth.config({
     id: secrets.client_id,
     secret: secrets.client_secret
-}).login(['user']);
+}).login();
 
 exports.login = function(req, res) {
     if (req.param('contribute-data')) {
