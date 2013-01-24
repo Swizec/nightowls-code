@@ -13,13 +13,11 @@ exports.list = function(req, res){
 var auth_url = github.auth.config({
     id: secrets.client_id,
     secret: secrets.client_secret
-}).login();
+}).login([]);
 
 exports.login = function(req, res) {
-    if (req.param('contribute-data')) {
-        req.session.contribute_data = true;
-    }
-    res.redirect(301, auth_url);
+    console.log(auth_url+'&redirect_uri=http://nightowls.swizec.com/auth');
+    res.redirect(301, auth_url+'&redirect_uri=http://nightowls.swizec.com/auth');
 };
 
 exports.auth = function (req, res) {
