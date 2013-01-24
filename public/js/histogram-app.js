@@ -29,7 +29,9 @@
         
         routes: {
             hours: 'hours',
-            days: 'days'
+            days: 'days',
+            weekends: 'weekends',
+            noweekends: 'noweekends'
         },
 
         initialize: function () {
@@ -46,6 +48,16 @@
         days: function () {
             this.graph.render('days');
             this.nav.model.set({state: 'days'});
+        },
+
+        weekends: function () {
+            this.graph.render('weekends');
+            this.nav.model.set({state: 'weekends'});
+        },
+
+        noweekends: function () {
+            this.graph.render('noweekends');
+            this.nav.model.set({state: 'noweekends'});
         }
     });
 
